@@ -22,7 +22,8 @@ class Board:
 
     def move(self, position, char: str):
         coordinate = keypad_to_coordinate(position)
-        self.board[coordinate[0]][coordinate[1]] = char
+        if self.board[coordinate[0]][coordinate[1]] is None:
+            self.board[coordinate[0]][coordinate[1]] = char
 
     def is_straight(self) -> bool:
         """
@@ -47,6 +48,13 @@ class Board:
             return True
 
         return False
+
+    def is_full(self) -> bool:
+        for row in self.board:
+            for element in self.board:
+                if element is None:
+                    return False
+        return True
 
 
 def keypad_to_coordinate(position: int) -> tuple:

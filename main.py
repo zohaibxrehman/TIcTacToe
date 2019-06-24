@@ -40,7 +40,10 @@ def main() -> None:
     while True:
         game = TicTacToe((p1, p2))
         winner = game.play()
-        print(f'And {winner} is the winner!!!')
+        if winner is None:
+            print('Game tied!')
+        else:
+            print(f'And the winner is  {winner}!!!')
         print(f'{p1.name} and {p2.name}, would you like to play again?')
         again = input('Again? (y/n) ')
         if again != 'y':
