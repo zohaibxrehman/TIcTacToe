@@ -10,6 +10,7 @@ class Board:
     string 'X' or 'O' or NoneType.
     """
     board: List[List[str]]
+    t
 
     def __init__(self):
         """
@@ -26,6 +27,5 @@ class Board:
     def is_winning(self):
         """
 
-        :return:
         """
 
