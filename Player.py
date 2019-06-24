@@ -2,19 +2,20 @@ class Player:
     """
 
     """
-    _name: str
-    _char: str
+    name: str
+    char: str
 
     def __init__(self, name: str, char: str):
         """Initialises the player.
         """
-        self._name = name
-        self._char = char
+        self.name = name
+        self.char = char
 
-    def change_name(self, new_name: str):
-        """
+    # def change_name(self, new_name: str):
+    #     """
+    #
+    #     :param new_name:
+    #     :return:
+    #     """
+    #     self._name = new_name
 
-        :param new_name:
-        :return:
-        """
-        self._name = new_name

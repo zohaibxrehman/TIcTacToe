@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Board:
     """
 
@@ -10,22 +11,62 @@ class Board:
     string 'X' or 'O' or NoneType.
     """
     board: List[List[str]]
-    t
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
 
         """
-        board = [[None, None, None],[None, None, None],[None, None, None]]
+        self.board = [[None, None, None],
+                      [None, None, None],
+                      [None, None, None]]
 
-    def move(self):
+    def move(self, position, char: str):
+        coordinate = keypad_to_coordinate(position)
+        self.board[coordinate[0]][coordinate[1]] = char
+
+    def is_straight(self) -> bool:
         """
 
         :return:
         """
+        for i in range(3):
+            if self.board[i][0] is not None and \
+                    self.board[i][0] == self.board[i][1] == self.board[i][2]:
+                return True
 
-    def is_winning(self):
-        """
+            if self.board[0][i] is not None and \
+                    self.board[0][i] == self.board[1][i] == self.board[2][i]:
+                return True
 
-        """
+        if self.board[0][0] is not None and \
+                self.board[0][0] == self.board[1][1] == self.board[2][2]:
+            return True
 
+        if self.board[0][2] is not None and \
+                self.board[0][2] == self.board[1][1] == self.board[2][0]:
+            return True
+
+        return False
+
+
+def keypad_to_coordinate(position: int) -> tuple:
+    if position == 7:
+        return 0, 0
+    elif position == 8:
+        return 0, 1
+    elif position == 9:
+        return 0, 2
+    elif position == 4:
+        return 1, 0
+    elif position == 5:
+        return 1, 1
+    elif position == 6:
+        return 1, 2
+    elif position == 1:
+        return 2, 0
+    elif position == 2:
+        return 2, 1
+    elif position == 3:
+        return 2, 2
+    else:
+        raise ValueError

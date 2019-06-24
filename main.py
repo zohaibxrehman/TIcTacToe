@@ -1,38 +1,15 @@
-import Board
-import Player
-from typing import Tuple
-
-class TicTacToe:
-    """
-
-    """
-    board: Board
-    players: Tuple[Player, Player]
-    turn: int
+from TicTacToe import TicTacToe
+from Player import Player
 
 
-    def __init__(self):
-        self.board = Board()
-        self.player1 = Player()
-        self.player2 = Player()
-
-    def start(self):
-        print('Hello there! What is your name?')
-
-
-    def make_a_move(self):
-
-    def end(self):
-
-
-def make_player(generic_name: str) -> Player:
+def make_player(generic_name: str, char: str) -> Player:
     """Return a new Player based on user input.
 
     Allow the user to choose a player name and player type.
     <generic_name> is a placeholder used to identify which player is being made.
     """
     name = input(f'Enter a name for {generic_name}: ')
-    player = Player(name)
+    player = Player(name, char)
     # valid_type = False
     # print(f'You have three options for the type of player {name}')
     # print('===USER TYPE TABLE===')
@@ -52,22 +29,22 @@ def make_player(generic_name: str) -> Player:
     #         player = StrategicPlayer(name)
     #         valid_type = True
     #     else:
-    #         print("Invalid key for User type. Please refer to the USER TYPE TABLE and try again!")
+    #         print("Invalid key for User type. Please refer to the USER TYPE
+    #         TABLE and try again!")
     return player
 
+
 def main() -> None:
-    p1 = make_player('p1')
-    p2 = make_player('p2')
+    p1 = make_player('p1', 'X')
+    p2 = make_player('p2', 'Y')
     while True:
         game = TicTacToe((p1, p2))
         winner = game.play()
         print(f'And {winner} is the winner!!!')
-        print(p1)
-        print(p2)
+        print(f'{p1.name} and {p2.name}, would you like to play again?')
         again = input('Again? (y/n) ')
         if again != 'y':
             return
-        
 
 
 if __name__ == '__main__':
