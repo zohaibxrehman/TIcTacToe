@@ -9,7 +9,7 @@ def make_player(generic_name: str, char: str) -> Player:
     <generic_name> is a placeholder used to identify which player is being made.
     """
     print('====USER TYPE TABLE====')
-    print('User Player:          U')
+    print('Human Player:         U')
     print('Computer:             C')
     print('Strategic Computer:   S')
     print('=======================')
@@ -18,12 +18,12 @@ def make_player(generic_name: str, char: str) -> Player:
     valid_type = False
     while not valid_type:
         user_type = input(f'Enter the type for {generic_name}: ')
-        if user_type == 'U' or user_type == 'u':
-            name = input(f'Enter a name for {generic_name}: ')
+        if user_type == 'H' or user_type == 'h':
+            name = input(f'Enter a name for human {generic_name}: ')
             player = UserPlayer(name, char)
             valid_type = True
         elif user_type == 'C' or user_type == 'c':
-            name = 'Computer'
+            name = 'Computer (Stupid)'
             player = RandomPlayer(name, char)
             valid_type = True
         elif user_type == 'S' or user_type == 's':

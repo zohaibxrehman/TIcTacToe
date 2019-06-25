@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 # generator expr
 
@@ -58,9 +58,9 @@ class Board:
                     return False
         return True
 
-    def is_valid(self, position: int) -> bool:
-        coordinate = keypad_to_coordinate(position)
-        return self.board[coordinate[0]][coordinate[1]] is None
+    # def is_valid(self, position: int) -> bool:
+    #     coordinate = keypad_to_coordinate(position)
+    #     return self.board[coordinate[0]][coordinate[1]] is None
 
     def valid_inputs(self) -> list:
         valid_inputs = []
@@ -69,6 +69,13 @@ class Board:
                 if self.board[x][y] is None:
                     valid_inputs.append(coordinate_to_keypad((x, y)))
         return valid_inputs
+
+    def empty_corner(self) -> Union[int, None]:
+        pass
+        # use valid_inputs?
+
+    def empty_side(self) -> Union[int, None]:
+        pass
 
 
 KEYPAD_TO_COORDINATE = {7: (0, 0), 8: (0, 1), 9: (0, 2),
