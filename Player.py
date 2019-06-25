@@ -55,7 +55,6 @@ class StrategicPlayer(Player):
             return random.choice([1, 3, 7, 9])
         elif isinstance(self.winning_move(board), int):
             return self.winning_move(board)
-
         elif isinstance(self.opponent_winning_move(board), int):
             return self.opponent_winning_move(board)
         # elif fork:
@@ -64,8 +63,8 @@ class StrategicPlayer(Player):
         #     return
         elif board.board[1][1] is None:
             return 5
-        # elif isinstance(self.opposite_corner(board), int):
-        #     return self.opposite_corner(board)
+        elif isinstance(self.opposite_corner(board), int):
+            return self.opposite_corner(board)
         elif isinstance(board.empty_corner(), int):
             return board.empty_corner()
         elif isinstance(board.empty_side(), int):
@@ -91,4 +90,13 @@ class StrategicPlayer(Player):
         return
 
     def opposite_corner(self, board: list) -> Optional[int]:
-        pass
+        # to be tested
+        opp_char = 'O' if self.char == 'X' else 'X'
+        if (board[0][0] is opp_char and board[2][2] is None) or \
+                (board[0][0] is None and board[2][2] is opp_char):
+            return 7 if board[0][0] is None else 3
+        elif (board[0][2] is opp_char and board[2][0] is None) or \
+                (board[2][0] is None and board[0][2] is opp_char):
+            return 9 if board[0][2] is None else 1
+        else:
+            return

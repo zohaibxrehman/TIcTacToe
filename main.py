@@ -53,9 +53,10 @@ def main() -> None:
             winner.wins += 1
         again = input(f'{p1.name} and {p2.name}, would you like to play again? '
                       f'(y/n)')
+        print('')
         if again != 'y' and again != 'Y':
             print(f'{p1.name} won {p1.wins} times!')
-            print(f'and {p2.name} won {p2.wins} times!')
+            print(f'{p2.name} won {p2.wins} times!')
             print('GAME OVER!')
             return None
 
