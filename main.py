@@ -1,5 +1,5 @@
 from TicTacToe import TicTacToe
-from Player import Player
+from Player import *
 
 
 def make_player(generic_name: str, char: str) -> Player:
@@ -8,36 +8,39 @@ def make_player(generic_name: str, char: str) -> Player:
     Allow the user to choose a player name and player type.
     <generic_name> is a placeholder used to identify which player is being made.
     """
-    name = input(f'Enter a name for {generic_name}: ')
-    player = Player(name, char)
-    # valid_type = False
-    # print(f'You have three options for the type of player {name}')
-    # print('===USER TYPE TABLE===')
-    # print('User Player:          U')
-    # print('Computer:             C')
-    # print('Strategic Computer:   S')
-    # print('=====================')
-    # while not valid_type:
-    #     type = input(f'Enter the type of player for {name}: ')
-    #     if type == 'U' or type == 'u':
-    #         player = UserPlayer(name)
-    #         valid_type = True
-    #     elif type == 'C' or type == 'c':
-    #         player = RandomPlayer(name)
-    #         valid_type = True
-    #     elif type == 'S' or type == 's':
-    #         player = StrategicPlayer(name)
-    #         valid_type = True
-    #     else:
-    #         print("Invalid key for User type. Please refer to the "
-    #               "USER TYPE TABLE and try again!")
+    print('====USER TYPE TABLE====')
+    print('User Player:          U')
+    print('Computer:             C')
+    print('Strategic Computer:   S')
+    print('=======================')
+
+    # player = Player(name, char)
+    valid_type = False
+    while not valid_type:
+        user_type = input(f'Enter the type for {generic_name}: ')
+        if user_type == 'U' or user_type == 'u':
+            name = input(f'Enter a name for {generic_name}: ')
+            player = UserPlayer(name, char)
+            valid_type = True
+        elif user_type == 'C' or user_type == 'c':
+            name = 'Computer'
+            player = RandomPlayer(name, char)
+            valid_type = True
+        elif user_type == 'S' or user_type == 's':
+            name = 'AI CYBORG (╬ Ò ‸ Ó)'
+            player = StrategicPlayer(name, char)
+            valid_type = True
+        else:
+            print("Invalid key for user type. Please refer to the "
+                  "USER TYPE TABLE and try again!")
+    print('')
     return player
 
 
 def main() -> None:
-    print("=== TIC-TAC-TOE ===")
-    p1 = make_player('p1', 'X')
-    p2 = make_player('p2', 'Y')
+    print("=== TIC-TAC-TOE ===\n\n")
+    p1 = make_player('player 1', 'X')
+    p2 = make_player('player 2', 'Y')
     while True:
         game = TicTacToe((p1, p2))
         winner = game.play()

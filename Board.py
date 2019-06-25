@@ -1,5 +1,7 @@
 from typing import List
 
+# generator expr
+
 
 class Board:
     """
@@ -51,34 +53,40 @@ class Board:
 
     def is_full(self) -> bool:
         for row in self.board:
-            for element in self.board:
+            for element in row:
                 if element is None:
                     return False
         return True
 
-    def valid(self, position: int) -> bool:
+    def is_valid(self, position: int) -> bool:
         coordinate = keypad_to_coordinate(position)
         return self.board[coordinate[0]][coordinate[1]] is None
 
+    def valid_inputs(self) -> list:
+        valid_inputs = []
+        for x in range(3):
+            for y in range(3):
+                if self.board[x][y] is None:
+                    valid_inputs.append(coordinate_to_keypad((x, y)))
+        return valid_inputs
+
+
+KEYPAD_TO_COORDINATE = {7: (0, 0), 8: (0, 1), 9: (0, 2),
+                        4: (1, 0), 5: (1, 1), 6: (1, 2),
+                        1: (2, 0), 2: (2, 1), 3: (2, 2)}
+COORDINATE_TO_KEYPAD = {c: k for k, c in KEYPAD_TO_COORDINATE.items()}
+
 
 def keypad_to_coordinate(position: int) -> tuple:
-    if position == 7:
-        return 0, 0
-    elif position == 8:
-        return 0, 1
-    elif position == 9:
-        return 0, 2
-    elif position == 4:
-        return 1, 0
-    elif position == 5:
-        return 1, 1
-    elif position == 6:
-        return 1, 2
-    elif position == 1:
-        return 2, 0
-    elif position == 2:
-        return 2, 1
-    elif position == 3:
-        return 2, 2
+    print(position)
+    if position in KEYPAD_TO_COORDINATE:
+        return KEYPAD_TO_COORDINATE[position]
+    else:
+        raise ValueError
+
+
+def coordinate_to_keypad(coordinate: tuple) -> tuple:
+    if coordinate in COORDINATE_TO_KEYPAD:
+        return COORDINATE_TO_KEYPAD[coordinate]
     else:
         raise ValueError
