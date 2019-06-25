@@ -35,6 +35,7 @@ def make_player(generic_name: str, char: str) -> Player:
 
 
 def main() -> None:
+    print("=== TIC-TAC-TOE ===")
     p1 = make_player('p1', 'X')
     p2 = make_player('p2', 'Y')
     while True:
@@ -43,7 +44,7 @@ def main() -> None:
         if winner is None:
             print('Game tied!')
         else:
-            print(f'And the winner is  {winner}!!!')
+            print(f'And the winner is  {winner}!!! \n')
         print(f'{p1.name} and {p2.name}, would you like to play again?')
         again = input('Again? (y/n) ')
         if again != 'y':

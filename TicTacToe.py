@@ -1,6 +1,7 @@
 from Board import Board
 import Player
 from typing import Union
+from Visualizer import visualizer
 
 
 class TicTacToe:
@@ -25,9 +26,11 @@ class TicTacToe:
         at 0 until the goal is reached.
         """
         while not self.board.is_straight() or not self.board.is_full():
+            visualizer(self.board)
             self.play_one_turn()
         # The player whose turn would be next (if the game weren't over) is
         # the loser. The one who went one turn before that is the winner.
+        visualizer(self.board)
         if not self.board.is_straight():
             winner = None
         else:
