@@ -54,11 +54,9 @@ class StrategicPlayer(Player):
             # not necessary but can mess up bad players more
             return random.choice([1, 3, 7, 9])
         elif isinstance(self.winning_move(board), int):
-            print('w')
             return self.winning_move(board)
 
         elif isinstance(self.opponent_winning_move(board), int):
-            print('ow')
             return self.opponent_winning_move(board)
         # elif fork:
         #     return

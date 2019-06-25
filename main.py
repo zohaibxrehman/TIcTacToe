@@ -41,7 +41,7 @@ def make_player(generic_name: str, char: str) -> Player:
 def main() -> None:
     print("=== TIC-TAC-TOE ===\n\n")
     p1 = make_player('player 1', 'X')
-    p2 = make_player('player 2', 'Y')
+    p2 = make_player('player 2', 'O')
     while True:
         game = TicTacToe((p1, p2))
         winner = game.play()
