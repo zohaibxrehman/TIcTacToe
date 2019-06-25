@@ -21,7 +21,7 @@ def visualizer(b: Board) -> None:
                '---------\n'
                f'{board[1][0]} | {board[1][1]} | {board[1][2]} \n' +
                '---------\n'
-               f'{board[2][0]} | {board[2][1]} | {board[2][2]} \n')
+               f'{board[2][0]} | {board[2][1]} | {board[2][2]}')
 
     print(display)
 

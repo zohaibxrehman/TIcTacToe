@@ -9,12 +9,13 @@ def make_player(generic_name: str, char: str) -> Player:
     <generic_name> is a placeholder used to identify which player is being made.
     """
     print('====USER TYPE TABLE====')
-    print('Human Player:         U')
+    print('Human Player:         H')
     print('Computer:             C')
     print('Strategic Computer:   S')
     print('=======================')
 
     # player = Player(name, char)
+
     valid_type = False
     while not valid_type:
         user_type = input(f'Enter the type for {generic_name}: ')
@@ -23,7 +24,7 @@ def make_player(generic_name: str, char: str) -> Player:
             player = UserPlayer(name, char)
             valid_type = True
         elif user_type == 'C' or user_type == 'c':
-            name = 'Computer (Stupid)'
+            name = 'Computer'
             player = RandomPlayer(name, char)
             valid_type = True
         elif user_type == 'S' or user_type == 's':
@@ -48,9 +49,9 @@ def main() -> None:
             print('Game tied!')
         else:
             print(f'And the winner is  {winner}!!! \n')
-        print(f'{p1.name} and {p2.name}, would you like to play again?')
-        again = input('Again? (y/n) ')
-        if again != 'y':
+        again = input(f'{p1.name} and {p2.name}, would you like to play again? '
+                      f'(y/n)')
+        if again != 'y' and again != 'Y':
             return
 
 

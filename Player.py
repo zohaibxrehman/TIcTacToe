@@ -24,12 +24,13 @@ class UserPlayer(Player):
     def move(self, board: Board) -> int:
         valid = False
         while not valid:
-            position = input(f'{self.name} make a move! ')
+            position = input(f'{self.name} make a move!')
             position = int(position)
             if position not in board.valid_inputs():
                 print('Invalid input. Choose another position...\n')
             else:
                 valid = True
+        print('')
         return position
 
 
