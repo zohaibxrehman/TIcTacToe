@@ -78,7 +78,6 @@ COORDINATE_TO_KEYPAD = {c: k for k, c in KEYPAD_TO_COORDINATE.items()}
 
 
 def keypad_to_coordinate(position: int) -> tuple:
-    print(position)
     if position in KEYPAD_TO_COORDINATE:
         return KEYPAD_TO_COORDINATE[position]
     else:

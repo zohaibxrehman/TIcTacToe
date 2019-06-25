@@ -24,7 +24,7 @@ class TicTacToe:
 
         A "round" is one full run of the game.
         """
-        while not self.board.is_straight() or not self.board.is_full():
+        while not self.board.is_straight() and not self.board.is_full():
             visualizer(self.board)
             self.play_one_turn()
         # The player whose turn would be next (if the game weren't over) is
