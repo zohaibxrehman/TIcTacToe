@@ -1,5 +1,5 @@
 from typing import List, Optional
-
+import random
 # generator expr
 
 
@@ -58,6 +58,13 @@ class Board:
                     return False
         return True
 
+    def is_empty(self) -> bool:
+        for row in self.board:
+            for element in row:
+                if element is not None:
+                    return False
+        return True
+
     # def is_valid(self, position: int) -> bool:
     #     coordinate = keypad_to_coordinate(position)
     #     return self.board[coordinate[0]][coordinate[1]] is None
@@ -71,11 +78,38 @@ class Board:
         return valid_inputs
 
     def empty_corner(self) -> Optional[int]:
-        pass
-        # use valid_inputs?
+        # randomness added to add an illusion of intelligence. otherwise will
+        # always play same and looks mechanical
+        empty_corners = []
+        if self.board[0][0] is None:
+            empty_corners.append(7)
+        if self.board[0][2] is None:
+            empty_corners.append(9)
+        if self.board[2][0] is None:
+            empty_corners.append(1)
+        if self.board[2][2] is None:
+            empty_corners.append(3)
+
+        if len(empty_corners) != 0:
+            return random.choice(empty_corners)
+        else:
+            return None
 
     def empty_side(self) -> Optional[int]:
-        pass
+        empty_corners = []
+        if self.board[0][1] is None:
+            empty_corners.append(8)
+        if self.board[1][0] is None:
+            empty_corners.append(4)
+        if self.board[1][2] is None:
+            empty_corners.append(6)
+        if self.board[2][1] is None:
+            empty_corners.append(2)
+
+        if len(empty_corners) != 0:
+            return random.choice(empty_corners)
+        else:
+            return None
 
 
 KEYPAD_TO_COORDINATE = {7: (0, 0), 8: (0, 1), 9: (0, 2),

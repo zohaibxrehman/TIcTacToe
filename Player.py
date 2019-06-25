@@ -40,7 +40,7 @@ class UserPlayer(Player):
 class RandomPlayer(Player):
     def move(self, board: Board) -> int:
         print("The dumb computer is thinking...")
-        for i in range(50000000):
+        for i in range(40000000):
             pass
         return random.choice(board.valid_inputs())
 
@@ -48,24 +48,30 @@ class RandomPlayer(Player):
 class StrategicPlayer(Player):
     def move(self, board: Board) -> int:
         print("The AI CYBORG (╬ Ò ‸ Ó) is thinking...")
-        for i in range(100000000):
+        for i in range(80000000):
             pass
-        if isinstance(self.winning_move(board), int):
+        if board.is_empty():
+            # not necessary but can mess up bad players more
+            return random.choice([1, 3, 7, 9])
+        elif isinstance(self.winning_move(board), int):
+            print('w')
             return self.winning_move(board)
+
         elif isinstance(self.opponent_winning_move(board), int):
+            print('ow')
             return self.opponent_winning_move(board)
         # elif fork:
         #     return
         # elif opp_fork:
         #     return
-        # elif board.board[5] is None:
-        #     return 5
+        elif board.board[1][1] is None:
+            return 5
         # elif isinstance(self.opposite_corner(board), int):
         #     return self.opposite_corner(board)
-        # elif isinstance(board.empty_corner(), int):
-        #     return board.empty_corner()
-        # elif isinstance(board.empty_side(), int):
-        #     return board.empty_side()
+        elif isinstance(board.empty_corner(), int):
+            return board.empty_corner()
+        elif isinstance(board.empty_side(), int):
+            return board.empty_side()
         else:
             return random.choice(board.valid_inputs())
 
