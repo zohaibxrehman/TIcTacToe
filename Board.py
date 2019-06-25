@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Optional
 
 # generator expr
 
@@ -70,11 +70,11 @@ class Board:
                     valid_inputs.append(coordinate_to_keypad((x, y)))
         return valid_inputs
 
-    def empty_corner(self) -> Union[int, None]:
+    def empty_corner(self) -> Optional[int]:
         pass
         # use valid_inputs?
 
-    def empty_side(self) -> Union[int, None]:
+    def empty_side(self) -> Optional[int]:
         pass
 
 

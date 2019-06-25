@@ -1,6 +1,6 @@
 from Board import Board
-import Player
-from typing import Union
+from Player import Player
+from typing import Optional
 from Visualizer import visualizer
 
 
@@ -19,7 +19,7 @@ class TicTacToe:
         self.turn = 0
         self._invalid = []
 
-    def play(self) -> Union[str, None]:
+    def play(self) -> Optional[Player]:
         """Play one round of TicTacToe. Return the name of the winner.
 
         A "round" is one full run of the game.
@@ -33,7 +33,7 @@ class TicTacToe:
         if not self.board.is_straight():
             winner = None
         else:
-            winner = self.whose_turn(self.turn - 1).name
+            winner = self.whose_turn(self.turn - 1)
         return winner
 
     def play_one_turn(self) -> None:

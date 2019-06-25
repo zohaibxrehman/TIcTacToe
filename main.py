@@ -45,14 +45,19 @@ def main() -> None:
     while True:
         game = TicTacToe((p1, p2))
         winner = game.play()
+
         if winner is None:
             print('Game tied!')
         else:
-            print(f'And the winner is  {winner}!!! \n')
+            print(f'And the winner is  {winner.name}!!! \n')
+            winner.wins += 1
         again = input(f'{p1.name} and {p2.name}, would you like to play again? '
                       f'(y/n)')
         if again != 'y' and again != 'Y':
-            return
+            print(f'{p1.name} won {p1.wins} times!')
+            print(f'and {p2.name} won {p2.wins} times!')
+            print('GAME OVER!')
+            return None
 
 
 if __name__ == '__main__':
