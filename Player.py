@@ -1,3 +1,6 @@
+import Board
+
+
 class Player:
     """
 
@@ -11,11 +14,13 @@ class Player:
         self.name = name
         self.char = char
 
-    # def change_name(self, new_name: str):
-    #     """
-    #
-    #     :param new_name:
-    #     :return:
-    #     """
-    #     self._name = new_name
-
+    def move(self, board: Board):
+        valid = False
+        while not valid:
+            position = input(f'{self.name} make a move! ')
+            position = int(position)
+            if not board.valid(position):
+                print('Invalid input. Choose another position...')
+            else:
+                valid = True
+        return position

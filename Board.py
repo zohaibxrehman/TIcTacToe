@@ -56,6 +56,10 @@ class Board:
                     return False
         return True
 
+    def valid(self, position: int) -> bool:
+        coordinate = keypad_to_coordinate(position)
+        return self.board[coordinate[0]][coordinate[1]] is None
+
 
 def keypad_to_coordinate(position: int) -> tuple:
     if position == 7:

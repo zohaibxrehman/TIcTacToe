@@ -29,8 +29,8 @@ def make_player(generic_name: str, char: str) -> Player:
     #         player = StrategicPlayer(name)
     #         valid_type = True
     #     else:
-    #         print("Invalid key for User type. Please refer to the USER TYPE
-    #         TABLE and try again!")
+    #         print("Invalid key for User type. Please refer to the "
+    #               "USER TYPE TABLE and try again!")
     return player
 
 
