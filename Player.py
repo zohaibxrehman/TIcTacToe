@@ -37,23 +37,35 @@ class UserPlayer(Player):
         return position
 
 
-class RandomPlayer(Player):
+class ComputerPlayer(Player):
     def move(self, board: Board) -> int:
         print("The dumb computer is thinking...")
         for i in range(40000000):
             pass
-        return random.choice(board.valid_inputs())
+        if isinstance(self.winning_move(board), int):
+            return self.winning_move(board)
+        else:
+            return random.choice(board.valid_inputs())
+
+    def winning_move(self, board: Board) -> Optional[int]:
+        for valid_input in board.valid_inputs():
+            board_copy = copy.deepcopy(board)
+            board_copy.move(valid_input, self.char)
+            if board_copy.is_straight():
+                return valid_input
+        return
 
 
-class StrategicPlayer(Player):
+class CyborgPlayer(ComputerPlayer):
     def move(self, board: Board) -> int:
         print("The AI CYBORG (╬ Ò ‸ Ó) is thinking...")
-        for i in range(80000000):
+        for i in range(70000000):
             pass
-        if board.is_empty():
-            # not necessary but can mess up bad players more
-            return random.choice([1, 3, 7, 9])
-        elif isinstance(self.winning_move(board), int):
+        # if board.is_empty():
+        #     # not necessary but can mess up bad players more
+        #     # algorithm will slightly diff if want to do this
+        #     return random.choice([1, 3, 7, 9])
+        if isinstance(self.winning_move(board), int):
             return self.winning_move(board)
         elif isinstance(self.opponent_winning_move(board), int):
             return self.opponent_winning_move(board)
@@ -72,33 +84,22 @@ class StrategicPlayer(Player):
         else:
             return random.choice(board.valid_inputs())
 
-    def winning_move(self, board: Board) -> Optional[int]:
-        for valid_input in board.valid_inputs():
-            board_copy = copy.deepcopy(board)
-            board_copy.move(valid_input, self.char)
-            if board_copy.is_straight():
-                return valid_input
-        return
-
     def opponent_winning_move(self, board: Board) -> Optional[int]:
-        char = 'O' if self.char == 'X' else 'X'
+        opp_char = 'O' if self.char == 'X' else 'X'
         for valid_input in board.valid_inputs():
             board_copy = copy.deepcopy(board)
-            board_copy.move(valid_input, char)
+            board_copy.move(valid_input, opp_char)
             if board_copy.is_straight():
                 return valid_input
         return
 
     def opposite_corner(self, board: Board) -> Optional[int]:
-        # to be tested
         opp_char = 'O' if self.char == 'X' else 'X'
         if (board[7] is opp_char and board[3] is None) or \
                 (board[7] is None and board[3] is opp_char):
-            print('7')
             return 7 if board[7] is None else 3
         elif (board[1] is opp_char and board[9] is None) or \
                 (board[1] is None and board[9] is opp_char):
-            print('1')
             return 9 if board[9] is None else 1
         else:
             return
@@ -111,6 +112,5 @@ class StrategicPlayer(Player):
             if isinstance(self.winning_move(board_copy), int):
                 board_copy.move(self.winning_move(board_copy), opp_char)
                 if isinstance(self.winning_move(board_copy), int):
-                    print('f')
                     return valid_input
         return
