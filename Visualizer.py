@@ -16,8 +16,8 @@ def visualizer(b: Board) -> None:
 
 
 def visualizer_helper(b: Board) -> list:
-    """Helper function for visualizer. Return a copy of the board(list) with
-    NoneType replaced with spaces.
+    """Helper function for visualizer. Return a list copy of the board's list
+    with NoneType replaced with spaces.
     """
     board = []
     for row in b.board:
