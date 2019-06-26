@@ -53,7 +53,7 @@ class HumanPlayer(Player):
         """
         valid = False
         while not valid:
-            position = input(f'{self.name} make a move!')
+            position = input(f'{self.name} make a move: ')
             position = int(position)
             if position not in board.valid_inputs():
                 print('Invalid input. Choose another position...\n')
@@ -79,7 +79,7 @@ class ComputerPlayer(Player):
     def move(self, board: Board) -> int:
         """Return a keypad position played by the computer on the <board>.
         """
-        print("The dumb computer is thinking...")
+        print(f'{self.name} is thinking...')
         time.sleep(1)
         if isinstance(self.winning_move(board), int):
             return self.winning_move(board)
@@ -114,7 +114,7 @@ class CyborgPlayer(ComputerPlayer):
     def move(self, board: Board) -> int:
         """Return a keypad position played by the computer on the <board>.
         """
-        print("The AI CYBORG (╬ Ò ‸ Ó) is thinking...")
+        print(f'{self.name} is thinking...')
         time.sleep(1.75)
         # if board.is_empty():
         #     # not necessary but can mess up bad players more

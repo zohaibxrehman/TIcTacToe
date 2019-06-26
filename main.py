@@ -42,6 +42,11 @@ def main() -> None:
     print("=== TIC-TAC-TOE ===\n\n")
     p1 = make_player('player 1', 'X')
     p2 = make_player('player 2', 'O')
+    if (isinstance(p1, ComputerPlayer) and isinstance(p2, ComputerPlayer)) or \
+        (isinstance(p1, CyborgPlayer) and isinstance(p2, CyborgPlayer)):
+        p1.name = p1.name + ' 1'
+        p2.name = p2.name + ' 2'
+
     while True:
         game = TicTacToe((p1, p2))
         winner = game.play()
