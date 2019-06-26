@@ -61,7 +61,7 @@ class StrategicPlayer(Player):
             return self.fork(board)
         # elif opp_fork:
         #     return
-        elif board.board[1][1] is None:
+        elif board[5] is None:
             return 5
         elif isinstance(self.opposite_corner(board), int):
             return self.opposite_corner(board)
@@ -89,25 +89,28 @@ class StrategicPlayer(Player):
                 return valid_input
         return
 
-    def opposite_corner(self, b: Board) -> Optional[int]:
+    def opposite_corner(self, board: Board) -> Optional[int]:
         # to be tested
-        board = b.board
         opp_char = 'O' if self.char == 'X' else 'X'
-        if (board[0][0] is opp_char and board[2][2] is None) or \
-                (board[0][0] is None and board[2][2] is opp_char):
-            return 7 if board[0][0] is None else 3
-        elif (board[0][2] is opp_char and board[2][0] is None) or \
-                (board[2][0] is None and board[0][2] is opp_char):
-            return 9 if board[0][2] is None else 1
+        if (board[7] is opp_char and board[3] is None) or \
+                (board[7] is None and board[3] is opp_char):
+            print('7')
+            return 7 if board[7] is None else 3
+        elif (board[1] is opp_char and board[9] is None) or \
+                (board[1] is None and board[9] is opp_char):
+            print('1')
+            return 9 if board[9] is None else 1
         else:
             return
 
     def fork(self, board: Board) -> Optional[int]:
+        opp_char = 'O' if self.char == 'X' else 'X'
         for valid_input in board.valid_inputs():
             board_copy = copy.deepcopy(board)
             board_copy.move(valid_input, self.char)
             if isinstance(self.winning_move(board_copy), int):
-                board_copy.move(self.winning_move(board_copy), self.char)
+                board_copy.move(self.winning_move(board_copy), opp_char)
                 if isinstance(self.winning_move(board_copy), int):
+                    print('f')
                     return valid_input
         return

@@ -28,7 +28,7 @@ def make_player(generic_name: str, char: str) -> Player:
             player = RandomPlayer(name, char)
             valid_type = True
         elif user_type == 'S' or user_type == 's':
-            name = 'AI CYBORG (╬ Ò ‸ Ó)'
+            name = 'AI CYBORG (☞◣д◢)☞'
             player = StrategicPlayer(name, char)
             valid_type = True
         else:

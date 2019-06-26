@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 import random
 # generator expr
 
@@ -21,6 +21,14 @@ class Board:
         self.board = [[None, None, None],
                       [None, None, None],
                       [None, None, None]]
+
+    def __getitem__(self, key: int) -> str:
+        coordinate = keypad_to_coordinate(key)
+        return self.board[coordinate[0]][coordinate[1]]
+
+    # def __setitem__(self, key: int, value: str):
+    #     coordinate = keypad_to_coordinate(key)
+    #     self.board[coordinate[0]][coordinate[1]] = value
 
     def move(self, position, char: str):
         coordinate = keypad_to_coordinate(position)
@@ -118,9 +126,9 @@ KEYPAD_TO_COORDINATE = {7: (0, 0), 8: (0, 1), 9: (0, 2),
 COORDINATE_TO_KEYPAD = {c: k for k, c in KEYPAD_TO_COORDINATE.items()}
 
 
-def keypad_to_coordinate(position: int) -> tuple:
-    if position in KEYPAD_TO_COORDINATE:
-        return KEYPAD_TO_COORDINATE[position]
+def keypad_to_coordinate(key: int) -> tuple:
+    if key in KEYPAD_TO_COORDINATE:
+        return KEYPAD_TO_COORDINATE[key]
     else:
         raise ValueError
 
