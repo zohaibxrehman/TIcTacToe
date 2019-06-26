@@ -1,44 +1,48 @@
-from typing import List, Optional, Union
+from typing import List, Optional
 import random
-# generator expr
 
 
 class Board:
     """
+    A 3x3 board for playing Tic-Tac-Toe
 
+    === Attributes ===
+    board: contains the elements of our board
 
     === Representation Invariants ===
-    - attribute board is list. This list consists of three lists. Each
-    of these three lists have three elements. These elements are either the
-    string 'X' or 'O' or NoneType.
+    - This board list consists of three lists.
+    - Each of these three lists have three elements.
+    - These elements are either the string 'X' or 'O' or NoneType.
+
     """
     board: List[List[str]]
 
     def __init__(self) -> None:
-        """
-
+        """Initialises the board.
         """
         self.board = [[None, None, None],
                       [None, None, None],
                       [None, None, None]]
 
     def __getitem__(self, key: int) -> str:
+        """Return item at the board's <key> keypad position.
+
+        Precondition: 1 <= key <= 9
+        """
         coordinate = keypad_to_coordinate(key)
         return self.board[coordinate[0]][coordinate[1]]
 
-    # def __setitem__(self, key: int, value: str):
-    #     coordinate = keypad_to_coordinate(key)
-    #     self.board[coordinate[0]][coordinate[1]] = value
+    def move(self, position, char: str) -> None:
+        """Insert <char> at board's keypad position <position>.
 
-    def move(self, position, char: str):
+        Precondition: char == 'X' or char == 'O'
+        """
         coordinate = keypad_to_coordinate(position)
         if self.board[coordinate[0]][coordinate[1]] is None:
             self.board[coordinate[0]][coordinate[1]] = char
 
     def is_straight(self) -> bool:
-        """
-
-        :return:
+        """Return True if there is a three-in-a-row else False.
         """
         for i in range(3):
             if self.board[i][0] is not None and \
@@ -60,6 +64,8 @@ class Board:
         return False
 
     def is_full(self) -> bool:
+        """Return True if board is full else False.
+        """
         for row in self.board:
             for element in row:
                 if element is None:
@@ -67,17 +73,20 @@ class Board:
         return True
 
     def is_empty(self) -> bool:
+        """
+        Return True if board is empty else False.
+        """
+
         for row in self.board:
             for element in row:
                 if element is not None:
                     return False
         return True
 
-    # def is_valid(self, position: int) -> bool:
-    #     coordinate = keypad_to_coordinate(position)
-    #     return self.board[coordinate[0]][coordinate[1]] is None
-
     def valid_inputs(self) -> list:
+        """Return a list of all keypad inputs that can be played on the board.
+        """
+
         valid_inputs = []
         for x in range(3):
             for y in range(3):
@@ -86,8 +95,10 @@ class Board:
         return valid_inputs
 
     def empty_corner(self) -> Optional[int]:
+        """Return a random corner keypad position which is of NoneType(empty).
+        """
         # randomness added to add an illusion of intelligence. otherwise will
-        # always play same and looks mechanical
+        # always play same and look mechanical
         empty_corners = []
         if self.board[0][0] is None:
             empty_corners.append(7)
@@ -104,6 +115,9 @@ class Board:
             return None
 
     def empty_side(self) -> Optional[int]:
+        """Return a random centre edge keypad position which is of
+        NoneType(empty).
+        """
         empty_corners = []
         if self.board[0][1] is None:
             empty_corners.append(8)
@@ -127,13 +141,18 @@ COORDINATE_TO_KEYPAD = {c: k for k, c in KEYPAD_TO_COORDINATE.items()}
 
 
 def keypad_to_coordinate(key: int) -> tuple:
+    """Return a tuple which contains the indices of <key> keypad position.
+    """
     if key in KEYPAD_TO_COORDINATE:
         return KEYPAD_TO_COORDINATE[key]
     else:
         raise ValueError
 
 
-def coordinate_to_keypad(coordinate: tuple) -> tuple:
+def coordinate_to_keypad(coordinate: tuple) -> int:
+    """Return a tuple which contains the keypad position of <coordinate> board
+    indices.
+    """
     if coordinate in COORDINATE_TO_KEYPAD:
         return COORDINATE_TO_KEYPAD[coordinate]
     else:

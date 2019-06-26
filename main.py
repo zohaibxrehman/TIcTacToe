@@ -11,34 +11,34 @@ def make_player(generic_name: str, char: str) -> Player:
     print('====USER TYPE TABLE====')
     print('Human Player:         H')
     print('Computer:             C')
-    print('Strategic Computer:   S')
+    print('AI CYBORG (☞◣д◢)☞:  A')
     print('=======================')
-
-    # player = Player(name, char)
 
     valid_type = False
     while not valid_type:
         user_type = input(f'Enter the type for {generic_name}: ')
         if user_type == 'H' or user_type == 'h':
             name = input(f'Enter a name for human {generic_name}: ')
-            player = UserPlayer(name, char)
+            player = HumanPlayer(name, char)
             valid_type = True
         elif user_type == 'C' or user_type == 'c':
             name = 'Computer'
-            player = RandomPlayer(name, char)
+            player = ComputerPlayer(name, char)
             valid_type = True
-        elif user_type == 'S' or user_type == 's':
+        elif user_type == 'A' or user_type == 'a':
             name = 'AI CYBORG (☞◣д◢)☞'
-            player = StrategicPlayer(name, char)
+            player = CyborgPlayer(name, char)
             valid_type = True
         else:
-            print("Invalid key for user type. Please refer to the "
-                  "USER TYPE TABLE and try again!")
+            print("Invalid key for user type! Please refer to the "
+                  "USER TYPE TABLE and try again.")
     print('')
     return player
 
 
 def main() -> None:
+    """Play multiple rounds of a TIC-TAC-TOE based on user input settings.
+    """
     print("=== TIC-TAC-TOE ===\n\n")
     p1 = make_player('player 1', 'X')
     p2 = make_player('player 2', 'O')

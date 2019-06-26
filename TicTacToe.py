@@ -6,14 +6,28 @@ from Visualizer import visualizer
 
 class TicTacToe:
     """
+    The classic tic-tac-toe game for two players.
+    First player to get three in a row wins.
 
+    The game can have multiple rounds.
+
+    === Attribute ===
+    board:
+        3x3 board on which the game is played
+    players:
+        the two players
+    turn:
+        The turn the game is on, beginning with turn 0.
+        If turn is even number, it is players[0]'s turn.
+        If turn is any odd number, it is player[1]'s turn.
     """
     board: Board
     players: tuple
     turn: int
-    _invalid: list
 
-    def __init__(self, players: tuple):
+    def __init__(self, players: tuple) -> None:
+        """Initialises the game.
+        """
         self.board = Board()
         self.players = players
         self.turn = 0
@@ -24,12 +38,9 @@ class TicTacToe:
 
         A "round" is one full run of the game.
         """
-        while not self.board.is_straight() and not self.board.is_full():
-            visualizer(self.board)
-            self.play_one_turn()
-        # The player whose turn would be next (if the game weren't over) is
-        # the loser. The one who went one turn before that is the winner.
         visualizer(self.board)
+        while not self.board.is_straight() and not self.board.is_full():
+            self.play_one_turn()
         if not self.board.is_straight():
             winner = None
         else:
@@ -37,7 +48,10 @@ class TicTacToe:
         return winner
 
     def play_one_turn(self) -> None:
-        """
+        """Play a single turn in the game.
+
+        Determine whose move it is, get their move, and update the board
+        as well as the number of the turn we are on.
         """
         player = self.whose_turn(self.turn)
 
@@ -46,7 +60,7 @@ class TicTacToe:
 
         self.turn += 1
 
-        # print(f'{next_player.name} moves {amount}.')
+        visualizer(self.board)
 
     def whose_turn(self, turn: int) -> Player:
         """Return the Player whose turn it is on the given turn number.

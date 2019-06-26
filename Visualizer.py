@@ -1,20 +1,9 @@
-# import pygame
 import Board
 
 
 def visualizer(b: Board) -> None:
+    """Converts the board's list of list to text representation of the board.
     """
-    Converts the board's list of list to text representation of the board.
-    :param board:
-    :return:
-    """
-    # pygame.init()
-    #
-    # window = pygame.display.set_mode((800, 600))
-    # pygame.display.set_caption('TIC-TAC-TOE')
-    #
-    #
-    # pygame.quit()
     board = visualizer_helper(b)
 
     display = (f'{board[0][0]} | {board[0][1]} | {board[0][2]} \n' +
@@ -27,6 +16,9 @@ def visualizer(b: Board) -> None:
 
 
 def visualizer_helper(b: Board) -> list:
+    """Helper function for visualizer. Return a copy of the board(list) with
+    NoneType replaced with spaces.
+    """
     board = []
     for row in b.board:
         board_row = []
